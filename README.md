@@ -7,15 +7,27 @@
 https://github.com/devanfer02/id-grow-swe-test.git #https
 git@github.com:devanfer02/id-grow-swe-test.git #ssh
 ```
-3. Change directory the project dir
+3. Change directory to the project dir
 ```zsh
 cd id-grow-swe-test
 ```
-4. Spin up the containers with this command, the application is running on port :80 so make sure your port :80 is free to use
+4. Clone the ```.env.example``` to ```.env``` file
+```zsh
+cp .env.example .env
+```
+5. Generate the application key with below command
+```zsh
+php artisan key:generate
+```
+6. Spin up the containers with this command, the application is running on port :80 so make sure your port :80 is free to use
 ```zsh
 docker compose up -d
 ```
-5.Visit the [localhost/api/health](http://localhost/api/health)
+7. Run the migrations with this command
+```zsh
+docker exec -it gudang-app php artisan migrate --seed
+```
+8.Visit the [localhost/api/health](http://localhost/api/health) to check if the container is already running or not
 
 ## Database Design
 
@@ -24,17 +36,6 @@ docker compose up -d
 ## Postman Documentation
 
 For API documentation, you can see it from this [link](https://documenter.getpostman.com/view/27789368/2sAXqv5LjS)
-
-## Features
-1. Authentication (Login/Register)
-2. Update user profile
-3. Fetch user profile
-4. Delete user
-5. Fetch all items
-6. Fetch item by id with mutations
-7. Add item
-8. Update item
-9. Delete item
 
 ## TechStack
 

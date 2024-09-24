@@ -1,20 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::controller(UserController::class)->prefix('/users')->group(function() {
+    Route::post('/login', 'login');
+    Route::post('/register', 'register');
 
-Route::get('/', function(Request $request) {
-    return [
-        'message' => 'ok'
-    ];
-});
-
-Route::post('/login', function(Request $request) {
-    return [
-        'pk' => 'dsadas'
-    ];
+    Route::middleware('auth:sanctum')->group(function() {
+        Route::get('', 'fetchProfile');
+        Route::put('', 'update');
+    });
 });

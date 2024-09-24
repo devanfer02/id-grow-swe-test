@@ -20,6 +20,7 @@ services:
       - db
     networks:
       - sistem-gudang
+    restart: on-failure
   db:
     image: mariadb:latest
     container_name: gudang-db

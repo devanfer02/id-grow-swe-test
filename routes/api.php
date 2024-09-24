@@ -22,8 +22,8 @@ Route::controller(ItemController::class)
 ->middleware('auth:sanctum')
 ->group(function() {
     Route::get('/', 'fetchAll');
-    Route::get('/{item}', 'fetchById');
+    Route::get('/{id}', 'fetchOne');
     Route::post('', 'create');
-    Route::put('/', 'update');
-    Route::delete('/', 'delete');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
 });

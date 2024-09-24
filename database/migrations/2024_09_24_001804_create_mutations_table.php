@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
 
             $table->foreign('mutated_by')->references('id')->on('users');
-            $table->foreign('mutated_item')->references('id')->on('items');
+            $table->foreign('mutated_item')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('mutation_type')->references('id')->on('mutation_types');
         });
     }

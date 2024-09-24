@@ -112,6 +112,7 @@ class UserService
     {
         try {
             $user = $request->user();
+            $user = $user->load('mutations', 'mutations.item');
             return HTTPResponse::send('success', 'successfully fetch user data', 200, $user);
         } catch (Exception $e) {
             error_log("[USER Service][fetchUser] error: " . $e->getMessage());

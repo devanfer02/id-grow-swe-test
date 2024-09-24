@@ -1,0 +1,41 @@
+services:
+  server:
+    image: nginx:stable-alpine3.19
+    container_name: gudang-proxy
+    ports:
+      - 80:80
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - sistem-gudang
+    restart: on-failure
+  app:
+    build:
+      dockerfile: ./deploy/Dockerfile
+      context: .
+    container_name: gudang-app
+    depends_on:
+      - db
+    networks:
+      - sistem-gudang
+  db:
+    image: mariadb:latest
+    container_name: gudang-db
+    volumes:
+      - gudang-db-vol:/var/lib/mysql
+    environment:
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    networks:
+      - sistem-gudang
+
+volumes:
+  gudang-db-vol:
+
+networks:
+  sistem-gudang:
+    driver: bridge

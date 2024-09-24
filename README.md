@@ -23,7 +23,7 @@ docker compose up -d
 ```zsh
 docker exec -it gudang-app php artisan migrate --seed
 ```
-7.Visit the [localhost/api/health](http://localhost/api/health) to check if the container is already running or not
+7. Visit the [localhost/api/health](http://localhost/api/health) to check if the container is already running or not
 
 ## Database Design
 

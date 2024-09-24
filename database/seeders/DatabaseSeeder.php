@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\MutationTypes;
+use App\Models\ItemCategory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +14,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $categories = [
+            'Electronics',
+            'Furniture',
+            'Stationery',
+            'Clothing',
+            'Food & Beverage'
+        ];
+        $mutations = [
+            'Addition',
+            'Subtraction',
+        ];
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        foreach($categories as $category) {
+            ItemCategory::insert([
+                'name' => $category
+            ]);
+        }
+
+        foreach($mutations as $mutation) {
+            MutationTypes::insert([
+                'name' => $mutation
+            ]);
+        }
     }
 }

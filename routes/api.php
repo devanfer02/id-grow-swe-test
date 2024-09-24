@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Utils\HTTPResponse;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(UserController::class)
@@ -26,4 +27,12 @@ Route::controller(ItemController::class)
     Route::post('', 'create');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'delete');
+});
+
+Route::get('/health', function() {
+    return HTTPResponse::send(
+        "success",
+        "server is running!",
+        200
+    );
 });

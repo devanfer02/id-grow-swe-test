@@ -95,20 +95,35 @@ class ItemService
                 return HTTPResponse::send('fail', 'failed to update item', 400, null, $validation->errors());
             }
 
+
             $diff = $item->stock + $request->stock;
 
-            $mutation = [
+            $mutationData = [
                 'mutated_by' => $request->user()->id,
                 'mutated_item' => $item->id,
                 'mutation_type' => $diff < $item->stock ? 2 : 1,
+                'amount' => 1,
                 'description' => $request['description']
             ];
+
+
+            $mutation = Mutation::where('mutated_item', '=', $item->id)
+            ->whereDate('created_at', '=', now()->toDateString())
+            ->where('mutation_type', '=', $mutationData['mutation_type'])
+            ->first();
 
             DB::beginTransaction();
 
             $item->fill($request->all())->save();
 
-            Mutation::create($mutation);
+            if (!isset($mutation))
+            {
+                Mutation::create($mutationData);
+            } else
+            {
+                $mutationData['amount'] = $mutation->amount + 1;
+                $mutation->fill($mutationData)->save();
+            }
 
             DB::commit();
 

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('mutated_by');
             $table->unsignedBigInteger('mutated_item');
             $table->unsignedBigInteger('mutation_type');
+            $table->integer('amount');
             $table->text('description');
             $table->timestamp('created_at')->useCurrent();
 

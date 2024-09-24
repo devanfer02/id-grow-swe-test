@@ -14,6 +14,7 @@ class Mutation extends Model
         'mutated_by',
         'mutated_item',
         'mutation_type',
+        'amount',
         'description',
         'created_at'
     ];

@@ -14,7 +14,7 @@ cd id-grow-swe-test
 4. Clone the ```.env.example``` to ```.env``` file
 ```zsh
 cp .env.example .env
-```
+``` 
 5. Spin up the containers with this command, the application is running on port :80 so make sure your port :80 is free to use
 ```zsh
 docker compose up -d

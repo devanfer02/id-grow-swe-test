@@ -29,8 +29,14 @@ class UserController extends Controller
         return $this->userSvc->update($request);
     }
 
+    public function delete(Request $request)
+    {
+        return $this->userSvc->delete($request);
+    }
+
     public function fetchProfile(Request $request)
     {
         return $this->userSvc->fetchUser($request);
     }
+
 }
